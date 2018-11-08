@@ -38,8 +38,8 @@ var html = `
     <br>
     <br>
     <br>
-    <button type="button" name="button" ng-show="btn" ng-click="up()">Update</button>
-    <span ng-show="msg">Server is Update! :)</span>
+    <button type="button" name="button" ng-hide="btn" ng-click="up()">Update</button>
+    <span ng-hide="msg">Server is Update! :)</span>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
