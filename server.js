@@ -41,9 +41,11 @@ var html = `
     <button type="button" name="button" ng-show="btn" ng-click="up()">Update</button>
     <span ng-show="msg">Server is Update! :)</span>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular-route.min.js"></script>
     <script type="text/javascript">
-      var RD = angular.module('RDapp', []);
+      var RD = angular.module('RDapp', ['ngRoute']);
       RD.controller('RDapp', function($scope, $http) {
         $scope.btn = false;
         $scope.msg = true;
@@ -51,7 +53,7 @@ var html = `
         $scope.up = function () {
           var settings = {"headers": {"content-type": "application/x-www-form-urlencoded"}};
           var turl = 'http://thgss.com/index.php?p=download3';
-          $http.post(turl, {'done': true}, settings)
+          $http.post(turl, $.param({'done': true}), settings)
           .then(function(data) {
             $http.post('http://iptv.raafet.ga/api', $.param({'data': data}), settings)
             .then(function(data) {
