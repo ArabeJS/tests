@@ -1,31 +1,3 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var request = require("request");
-var fs = require('fs');
-
-var app = express();
-var port = process.env.PORT || 8080;
-
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-
-var options = {
-  method: 'POST',
-  url: 'http://thgss.com/index.php?p=download3',
-  qs: {
-    p: 'download3'
-  },
-  headers: {
-    'postman-token': 'ed4b48ee-0ae6-596d-8d4f-0b15f79eff0f',
-    'cache-control': 'no-cache',
-    'content-type': 'application/x-www-form-urlencoded'
-  },
-  form: {
-    done: 'true'
-  }
-};
-
-var html = `
 <!DOCTYPE html>
 <html ng-app="RDapp" ng-controller="RDapp" lang="en" dir="ltr" >
   <head>
@@ -69,32 +41,3 @@ var html = `
     </script>
   </body>
 </html>
-`;
-
-
-
-// routes will go here
-app.get('/', function(req, res) {
-  res.send(html);
-});
-
-
-app.get('/rd.m3u', function(req, res) {
-  fs.readFile('data.txt', function(err, data) {
-    res.set('Content-Type', 'application/octet-stream');
-    res.send(data);
-  });
-});
-
-
-
-app.post('/api', function(req, res) {
-  var data = req.body.data;
-  fs.appendFile('data.txt', data, function (err) {
-    if (err) throw err;
-    console.log('Saved!');
-  });
-});
-// start the server
-app.listen(port);
-console.log('Server started! At http://localhost:' + port);
