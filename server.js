@@ -43,7 +43,7 @@ var html = `
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
     <script type="text/javascript">
-      var RD = angular.module('RDapp', ['ngRoute']);
+      var RD = angular.module('RDapp', []);
       RD.controller('RDapp', function($scope, $http) {
         $scope.btn = false;
         $scope.msg = true;
