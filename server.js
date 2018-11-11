@@ -31,13 +31,6 @@ app.get('/add/:id', function(req, res) {
     res.send("The Key was succesfully saved!");
   }); 
 
-  download(url,'data.txt', function(err){
-    if (err) {
-      res.send(err);
-    }else{
-      res.send('<h1>OK!</h1>');
-    }
-  });
 });
 
 app.get('/', function(req, res) {
