@@ -25,7 +25,12 @@ var download = function(url, dest, cb) {
 // routes will go here
 app.get('/add/:id', function(req, res) {
   var data = req.params.id;
-  var url = "http://24.thgss.com:8000/get.php?username="+data+"&password="+data+"&type=m3u&output=mpegts";
+  
+  fs.writeFile('data.txt', data, (err) => {
+    if (err) throw err;
+    console.log("The Key was succesfully saved!");
+  }); 
+
   download(url,'data.txt', function(err){
     if (err) {
       res.send(err);
@@ -42,8 +47,8 @@ app.get('/', function(req, res) {
 
 app.get('/rd.m3u', function(req, res) {
   fs.readFile('data.txt', function(err, data) {
-    res.set('Content-Type', 'application/octet-stream');
-    res.send(data);
+    var url = "http://24.thgss.com:8000/get.php?username="+data+"&password="+data+"&type=m3u&output=mpegts";
+    res.redirect(url);
   });
 });
 
