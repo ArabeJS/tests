@@ -27,7 +27,7 @@ app.get('/add/:id', function(req, res) {
   var data = req.params.id;
   
   fs.writeFile('data.txt', data, (err) => {
-    if (err) throw err;
+    if (err) res.send(err);
     res.send("The Key was succesfully saved!");
   }); 
 
