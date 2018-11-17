@@ -28,19 +28,37 @@ app.get('/add/:id', function(req, res) {
   
   fs.writeFile('data.txt', data, (err) => {
     if (err) res.send(err);
-    res.send("The Key was succesfully saved!");
+    res.send("<center><h2>✔ The Key was succesfully saved!<h2></center>");
+  }); 
+
+});
+
+// routes will go here
+app.post('/addUrl', function(req, res) {
+  var data = req.body.url;
+  
+  fs.writeFile('dataUrl.txt', data, (err) => {
+    if (err) res.send(err);
+    res.send("<center><h2>✔ The URL was succesfully saved!<h2></center>");
   }); 
 
 });
 
 app.get('/', function(req, res) {
-  res.send('Welcom!');
+  res.send('Welcome!');
 });
 
 
 app.get('/rd.m3u', function(req, res) {
   fs.readFile('data.txt', function(err, data) {
     var url = "http://24.thgss.com:8000/get.php?username="+data+"&password="+data+"&type=m3u&output=mpegts";
+    res.redirect(url);
+  });
+});
+
+app.get('/rdu.m3u', function(req, res) {
+  fs.readFile('dataUrl.txt', function(err, data) {
+    var url = data;
     res.redirect(url);
   });
 });
